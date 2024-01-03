@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { GoBug } from 'react-icons/go';
+import classNames from 'classnames';
 
 const links = [
   { name: 'Dashboard', href: '/' },
@@ -21,9 +22,11 @@ export default function Navbar() {
           <Link
             key={link.name}
             href={link.href}
-            className={`${
-              currentPath === link.href ? 'text-indigo-600' : ''
-            }  text-zinc-500 hover:text-indigo-600 transition-colors`}
+            className={classNames({
+              ' text-zinc-500': currentPath !== link.href,
+              'text-indigo-600': currentPath === link.href,
+              'hover:text-indigo-600 transition-colors': true,
+            })}
           >
             {link.name}
           </Link>
