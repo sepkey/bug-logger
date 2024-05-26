@@ -16,14 +16,13 @@ export default function NewBug() {
   const { control, register, handleSubmit } = useForm<BugFormValues>();
   const router = useRouter();
 
+  async function onSubmit(data: BugFormValues) {
+    await axios.post('/api/bugs', data);
+    router.push('/bugs');
+  }
+
   return (
-    <form
-      onSubmit={handleSubmit(async (data) => {
-        await axios.post('/api/bugs', data);
-        router.push('/bugs');
-      })}
-      className="max-w-xl space-y-3"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl space-y-3">
       <TextField.Root placeholder="Title" {...register('title')} />
 
       <Controller
