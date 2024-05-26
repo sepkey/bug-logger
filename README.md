@@ -18,11 +18,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tehnologies used
 
-Prisma
+```Prisma
 Radix-ui
 Zod
 MD editor (React-simplemde-editor)
 React-hook-form
 Axios
+```
 
 
