@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createBugSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import ErrorMessage from '@/app/_components/ErrorMessage';
+import Spinner from '@/app/_components/Spinner';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
@@ -22,7 +23,7 @@ export default function NewBug() {
     control,
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<BugFormValues>({
     resolver: zodResolver(createBugSchema),
   });
@@ -58,7 +59,9 @@ export default function NewBug() {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Bug</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Bug {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
