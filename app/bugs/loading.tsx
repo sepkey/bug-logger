@@ -1,13 +1,11 @@
-import prisma from '@/prisma/client';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { Table } from '@radix-ui/themes';
-import delay from 'delay';
-import StatusBadge from '../_components/StatusBadge';
+import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import BugsActions from './BugsActions';
 
-export default async function Bugs() {
-  const bugs = await prisma.bug.findMany();
-  delay(10000);
-
+export default function LoadingBugs() {
+  const bugs = [1, 2, 3, 4, 5];
   return (
     <div>
       <BugsActions />
@@ -22,18 +20,18 @@ export default async function Bugs() {
         <Table.Body>
           {bugs.map((bug) => {
             return (
-              <Table.Row key={bug.id}>
+              <Table.Row key={bug}>
                 <Table.Cell>
-                  {bug.title}
+                  <Skeleton />
                   <div className="block md:hidden">
-                    <StatusBadge status={bug.status} />
+                    <Skeleton />
                   </div>
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  <StatusBadge status={bug.status} />
+                  <Skeleton />
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  {bug.createdAt.toDateString()}
+                  <Skeleton />
                 </Table.Cell>
               </Table.Row>
             );
