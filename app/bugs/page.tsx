@@ -3,7 +3,7 @@ import { Table } from '@radix-ui/themes';
 import delay from 'delay';
 import StatusBadge from '../_components/StatusBadge';
 import BugsActions from './BugsActions';
-import Link from 'next/link';
+import Link from '../_components/Link';
 
 export default async function Bugs() {
   const bugs = await prisma.bug.findMany();
@@ -25,7 +25,7 @@ export default async function Bugs() {
             return (
               <Table.Row key={bug.id}>
                 <Table.Cell>
-                  <Link href={`/bugs/${bug.id}`}>{bug.title}</Link>
+                  <Link href={`bugs/${bug.id}`}>{bug.title}</Link>
                   <div className="block md:hidden">
                     <StatusBadge status={bug.status} />
                   </div>
