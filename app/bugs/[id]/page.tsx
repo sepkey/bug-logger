@@ -1,4 +1,6 @@
+import StatusBadge from '@/app/_components/StatusBadge';
 import prisma from '@/prisma/client';
+import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -17,10 +19,12 @@ export default async function BugDetail({ params }: Props) {
 
   return (
     <div>
-      <p>{bug.title}</p>
-      <p>{bug.status}</p>
-      <p>{bug.description}</p>
-      <p>{bug.createdAt.toDateString()}</p>
+      <Heading>{bug.title}</Heading>
+      <Flex gap="3" my="2">
+        <StatusBadge status={bug.status} />
+        <Text>{bug.createdAt.toDateString()}</Text>
+      </Flex>
+      <Card>{bug.description}</Card>
     </div>
   );
 }
