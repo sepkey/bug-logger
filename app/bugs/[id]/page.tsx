@@ -3,6 +3,7 @@ import prisma from '@/prisma/client';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import delay from 'delay';
 
 type Props = {
   params: { id: string };
@@ -17,6 +18,7 @@ export default async function BugDetail({ params }: Props) {
   });
 
   if (!bug) notFound();
+  await delay(2000);
 
   return (
     <div>
