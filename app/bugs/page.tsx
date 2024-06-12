@@ -1,13 +1,11 @@
-import prisma from '@/prisma/client';
-import { Table } from '@radix-ui/themes';
-import delay from 'delay';
-import StatusBadge from '../_components/StatusBadge';
-import BugsActions from './BugsActions';
-import Link from '../_components/Link';
+import prisma from "@/prisma/client";
+import { Table } from "@radix-ui/themes";
+
+import BugsActions from "./BugsActions";
+import { StatusBadge, Link } from "../_components";
 
 export default async function Bugs() {
   const bugs = await prisma.bug.findMany();
-  delay(10000);
 
   return (
     <div>

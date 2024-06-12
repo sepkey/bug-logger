@@ -1,8 +1,7 @@
-import 'react-loading-skeleton/dist/skeleton.css';
-import { Table } from '@radix-ui/themes';
-import React from 'react';
-import Skeleton from 'react-loading-skeleton';
-import BugsActions from './BugsActions';
+import { Table } from "@radix-ui/themes";
+import React from "react";
+import BugsActions from "./BugsActions";
+import { Skeleton } from "../_components";
 
 export default function LoadingBugs() {
   const bugs = [1, 2, 3, 4, 5];
