@@ -17,6 +17,7 @@ export default async function BugDetail({ params }: Props) {
   });
 
   if (!bug) notFound();
+  await delay(2000);
 
   return (
     <div>
