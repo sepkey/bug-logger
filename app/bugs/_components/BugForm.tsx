@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createBugSchema } from '@/app/validationSchemas';
+import { bugSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import ErrorMessage from '@/app/_components/ErrorMessage';
 import Spinner from '@/app/_components/Spinner';
@@ -17,7 +17,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 });
 
-type BugFormValues = z.infer<typeof createBugSchema>;
+type BugFormValues = z.infer<typeof bugSchema>;
 type Props = { bug?: Bug };
 
 export default function BugForm({ bug }: Props) {
@@ -27,7 +27,7 @@ export default function BugForm({ bug }: Props) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<BugFormValues>({
-    resolver: zodResolver(createBugSchema),
+    resolver: zodResolver(bugSchema),
   });
   const router = useRouter();
   const [error, setError] = useState('');
