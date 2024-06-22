@@ -34,7 +34,8 @@ export default function BugForm({ bug }: Props) {
 
   async function onSubmit(data: BugFormValues) {
     try {
-      await axios.post('/api/bugs', data);
+      if (bug) await axios.patch(`/api/bugs/${bug.id}`, data);
+      else await axios.post('/api/bugs', data);
       router.push('/bugs');
     } catch (error) {
       setError('An unexpected error occured!');
@@ -67,7 +68,7 @@ export default function BugForm({ bug }: Props) {
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button disabled={isSubmitting}>
-          Submit New Bug {isSubmitting && <Spinner />}
+          {bug ? 'Update bug' : 'Submit New Bug '} {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
