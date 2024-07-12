@@ -1,8 +1,8 @@
-import prisma from "@/prisma/client";
-import { Table } from "@radix-ui/themes";
+import prisma from '@/prisma/client';
+import { Table } from '@radix-ui/themes';
 
-import BugsActions from "./BugsActions";
-import { StatusBadge, Link } from "../_components";
+import BugsActions from './BugsActions';
+import { StatusBadge, Link } from '../_components';
 
 export default async function Bugs() {
   const bugs = await prisma.bug.findMany();
@@ -42,3 +42,7 @@ export default async function Bugs() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
+
+// export const revalidate = 0;
