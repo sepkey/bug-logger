@@ -12,10 +12,7 @@ import { z } from 'zod';
 import ErrorMessage from '@/app/_components/ErrorMessage';
 import Spinner from '@/app/_components/Spinner';
 import { Bug } from '@prisma/client';
-
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-});
+import SimpleMDE from 'react-simplemde-editor';
 
 type BugFormValues = z.infer<typeof bugSchema>;
 type Props = { bug?: Bug };
