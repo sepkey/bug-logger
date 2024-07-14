@@ -12,7 +12,7 @@ export default function BugDetails({ bug }: { bug: Bug }) {
         <StatusBadge status={bug.status} />
         <Text>{bug.createdAt.toDateString()}</Text>
       </Flex>
-      <Card className="prose" mt="4">
+      <Card className="prose max-w-full" mt="4">
         <ReactMarkdown>{bug.description}</ReactMarkdown>
       </Card>
     </>
