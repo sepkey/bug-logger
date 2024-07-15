@@ -1,7 +1,11 @@
+'use client';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Button, Dialog, Flex } from '@radix-ui/themes';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function DeleteBugButton({ bugId }: { bugId: number }) {
+  const router = useRouter();
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -25,7 +29,16 @@ export default function DeleteBugButton({ bugId }: { bugId: number }) {
             </Button>
           </Dialog.Close>
           <Dialog.Close>
-            <Button color="red">Delete bug</Button>
+            <Button
+              onClick={async () => {
+                await axios.delete(`/api/bugs/${bugId}`);
+                router.push('/bugs');
+                router.refresh();
+              }}
+              color="red"
+            >
+              Delete bug
+            </Button>
           </Dialog.Close>
         </Flex>
       </Dialog.Content>
