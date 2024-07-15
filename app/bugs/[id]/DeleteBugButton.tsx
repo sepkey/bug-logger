@@ -1,4 +1,5 @@
 'use client';
+import { Spinner } from '@/app/_components';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Button, Dialog, Flex } from '@radix-ui/themes';
 import axios from 'axios';
@@ -14,21 +15,27 @@ export default function DeleteBugButton({
 }) {
   const router = useRouter();
   const [error, setError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   async function handleDelete() {
     try {
+      setIsDeleting(true);
       await axios.delete(`/api/bugs/${bugId}`);
       router.push('/bugs');
       router.refresh();
     } catch (error) {
       setError(true);
+      setIsDeleting(false);
     }
   }
   return (
     <>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Button color="red">{full ? 'Delete bug' : <TrashIcon />}</Button>
+          <Button disabled={isDeleting} color="red">
+            {full ? 'Delete bug' : <TrashIcon />}
+            {isDeleting && <Spinner />}
+          </Button>
         </Dialog.Trigger>
 
         <Dialog.Content>
