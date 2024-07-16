@@ -6,7 +6,7 @@ export default function EditBugButton({ bugId }: { bugId: number }) {
   return (
     <Button>
       <Pencil2Icon />
-      <Link href={`/bugs/${bugId}/edit`}>Edit bug</Link>
+      <Link href={`/bugs/edit/${bugId}`}>Edit bug</Link>
     </Button>
   );
 }

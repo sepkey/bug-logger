@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 const links = [
   { name: 'Dashboard', href: '/' },
-  { name: 'Bugs', href: '/bugs' },
+  { name: 'Bugs', href: '/bugs/list' },
 ];
 
 export default function Navbar() {

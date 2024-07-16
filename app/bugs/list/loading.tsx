@@ -1,13 +1,10 @@
-import prisma from '@/prisma/client';
 import { Table } from '@radix-ui/themes';
-
+import React from 'react';
+import { Skeleton } from '../../_components';
 import BugsActions from './BugsActions';
-import { StatusBadge, Link } from '../_components';
-import DeleteBugButton from './[id]/DeleteBugButton';
 
-export default async function Bugs() {
-  const bugs = await prisma.bug.findMany();
-
+export default function LoadingBugs() {
+  const bugs = [1, 2, 3, 4, 5];
   return (
     <div>
       <BugsActions />
@@ -17,27 +14,23 @@ export default async function Bugs() {
             <Table.Cell>Bug</Table.Cell>
             <Table.Cell className="hidden md:table-cell">Status</Table.Cell>
             <Table.Cell className="hidden md:table-cell">Created at</Table.Cell>
-            <Table.Cell>Delete</Table.Cell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {bugs.map((bug) => {
             return (
-              <Table.Row key={bug.id}>
+              <Table.Row key={bug}>
                 <Table.Cell>
-                  <Link href={`bugs/${bug.id}`}>{bug.title}</Link>
+                  <Skeleton />
                   <div className="block md:hidden">
-                    <StatusBadge status={bug.status} />
+                    <Skeleton />
                   </div>
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  <StatusBadge status={bug.status} />
+                  <Skeleton />
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  {bug.createdAt.toDateString()}
-                </Table.Cell>
-                <Table.Cell>
-                  <DeleteBugButton bugId={bug.id} full={false} />
+                  <Skeleton />
                 </Table.Cell>
               </Table.Row>
             );
@@ -47,7 +40,3 @@ export default async function Bugs() {
     </div>
   );
 }
-
-export const dynamic = 'force-dynamic';
-
-// export const revalidate = 0;

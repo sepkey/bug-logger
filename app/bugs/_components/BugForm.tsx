@@ -33,7 +33,7 @@ export default function BugForm({ bug }: Props) {
     try {
       if (bug) await axios.patch(`/api/bugs/${bug.id}`, data);
       else await axios.post('/api/bugs', data);
-      router.push('/bugs');
+      router.push('/bugs/list');
       router.refresh();
     } catch (error) {
       setError('An unexpected error occured!');

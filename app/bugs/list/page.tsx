@@ -1,10 +1,13 @@
-import { Table } from "@radix-ui/themes";
-import React from "react";
-import BugsActions from "./BugsActions";
-import { Skeleton } from "../_components";
+import prisma from '@/prisma/client';
+import { Table } from '@radix-ui/themes';
 
-export default function LoadingBugs() {
-  const bugs = [1, 2, 3, 4, 5];
+import BugsActions from './BugsActions';
+import { StatusBadge, Link } from '../../_components';
+import DeleteBugButton from '../[id]/DeleteBugButton';
+
+export default async function Bugs() {
+  const bugs = await prisma.bug.findMany();
+
   return (
     <div>
       <BugsActions />
@@ -14,23 +17,27 @@ export default function LoadingBugs() {
             <Table.Cell>Bug</Table.Cell>
             <Table.Cell className="hidden md:table-cell">Status</Table.Cell>
             <Table.Cell className="hidden md:table-cell">Created at</Table.Cell>
+            <Table.Cell>Delete</Table.Cell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {bugs.map((bug) => {
             return (
-              <Table.Row key={bug}>
+              <Table.Row key={bug.id}>
                 <Table.Cell>
-                  <Skeleton />
+                  <Link href={`./${bug.id}`}>{bug.title}</Link>
                   <div className="block md:hidden">
-                    <Skeleton />
+                    <StatusBadge status={bug.status} />
                   </div>
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  <Skeleton />
+                  <StatusBadge status={bug.status} />
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  <Skeleton />
+                  {bug.createdAt.toDateString()}
+                </Table.Cell>
+                <Table.Cell>
+                  <DeleteBugButton bugId={bug.id} full={false} />
                 </Table.Cell>
               </Table.Row>
             );
@@ -40,3 +47,7 @@ export default function LoadingBugs() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
+
+// export const revalidate = 0;
